@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="form_container">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label>Name*</label>
+                        <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required" class="invalidFiled">Name is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Age*</label>
+                        <input type="number" formControlName="age" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
+                        <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+                            <div *ngIf="f.age.errors.required" class="invalidFiled">age is required</div>
+                            <div *ngIf="f.age.errors.pattern">age must be a number</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender*</label> 
+                        <div>
+                            <label for="male">Male</label>
+                            <span><input id="male" type="radio" value="male" name="gender" formControlName="gender"  [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"/></span>  
+                        </div>
+                        <div>
+                            <label for="female">Female</label>
+                            <span><input id="female" type="radio"  value="female" name="gender" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" /></span>
+                        </div>
+                        <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                            <div *ngIf="f.gender.errors.required" class="invalidFiled">Gender is required</div>
+                            
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <label>Profile Image</label>
+                        <input type="file" formControlName="file" class="form-control" 
+                        (change)="onChange($event)"
+                        [ngClass]="{ 'is-invalid': submitted && f.file.errors }" />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number*</label>
+                        <input type="text" formControlName="phone_number" class="form-control"
+                         [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }" />
+                        <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
+                            <div *ngIf="f.phone_number.errors.required" class="invalidFiled">phone number is required</div>
+                            <div *ngIf="f.phone_number.errors.pattern" class="invalidFiled">phone number must be 10 digit</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Weight(Kg)</label>
+                        <input type="number" formControlName="weight" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.weight.errors }" />
+                        <div *ngIf="submitted && f.weight.errors" class="invalid-feedback">
+                            <div *ngIf="f.weight.errors.pattern" class="invalidFiled">weight must be a number</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Medical History</label>
+                        <select name="medicalHistory" formControlName="medicalHistory" class="form-control">
+                            <option *ngFor="let option of medicalHistory" [value]="option">
+                            {{option}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-6" style="margin-left: 39px;">
+            <div *ngIf="formDetails">
+                <label>Name: {{formDetails.name}}</label><br>
+                <label>Age: {{formDetails.age}}</label><br>
+                <label>Gender:{{formDetails.gender}}</label><br>
+                <label>Phone Number: {{formDetails.phone_number}}</label><br>
+                <label>Weight: {{formDetails.weight}}</label><br>
+                <label>Medical History: {{formDetails.medicalHistory}}</label><br>
+                Profile Image : <img [src]="formDetails.fileUrl" class="browsFileImgStyle">
+            </div>
+        </div>
+        
+      </div>
+  </div>
